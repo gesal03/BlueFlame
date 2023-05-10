@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/default.css' %}">
+    <link rel="stylesheet" href="{% static 'css/booth2.css' %}">
+    <title>{{pub.name}}</title>
+</head>
+
+<body class="div1">
+    <button class="button" type="button" onclick="myFunction()">
+        <img class="back-image" src="{% static 'img/back.png' %}" alt="back_button">
+    </button>
+
+    <script>
+        function myFunction() {
+          // booth.html로 이동
+            window.location.href = "booth.html";
+        }
+    </script>
+    <img src="{% static 'img/LogoText.png' %}" alt="BlueFlame" class="logo" >
+    <nav class="navbar fixed-top">
+        <input type="checkbox" id="icon">
+    <label for="icon">  <!--label은 인라인 스타일-->
+        <span></span>
+        <span></span>
+        <span></span>
+    </label>
+    <div id="header">
+        <img src="{% static 'img/Menu.png' %}" style="height: 3vh; margin-top: 27px; margin-left: 30px;" >
+        <div class="line"></div>
+        <ul class="menu_item" style="margin-left: 30px;">
+            <li> 
+                <img src="{% static 'img/Vector.png' %}" style="height: 1.5vh;">
+                <a href="{% url 'timeline' %}">타임 테이블</a>
+            </li>
+            <li class="menu_li">
+                <img src="{% static 'img/Vector.png' %}" style="height: 1.5vh;">
+                <a href="{% url 'booth' 0 %}">부스 안내</a> 
+            </li>
+            <li class="menu_li">
+                <img src="{% static 'img/Vector.png' %}" style="height: 1.5vh;">
+                <a href="{% url 'aboutus' %}">About us</a>
+            </li>
+            <li class="menu_li">
+                <img src="{% static 'img/Vector.png' %}" style="height: 1.5vh;">
+                <a href="{% url 'home' %}">Home</a>
+            </li>
+        </ul>
+    </div>
+    </nav>
+    <div class="title">
+        <p class="track-text">{{pub.belong}}</p>
+        <p class="drink-text">{{pub.name}}</p>
+        {% comment %} <img class ="image" src="{{pub.image.url}}" alt="이미지 설명"> {% endcomment %}
+        <div class="upper-section">
+            <p class="ss-text">
+                {{pub.content}}
+            </p>
+        </div>
+        <div class="lower-section">
+            <p class="INSTA">
+            CONTACT : {{pub.contact}}
+            </p>
+        </div>
+    </div>
+    <div class="upper-section">
+        <p class="menu-text">메뉴</p>
+            {%for menu in pub.menu_set.all%}
+                <div class="div2">
+                    <p class="l1-menu">{{menu.name}}</p>
+                    <hr class="line-menu">
+                    <p class="r1-menu"> {{menu.price}}</p>
+                </div>
+            {%endfor%}
+    </div>
+
+    <div class="lower-section">
+        <div class="div3">
+            <p class="place-title">장소</p>
+            <p class="place">{{pub.location}}</p>
+        </div>
+        <img class ="image-place" src="{% static 'img/booth12.png' %}" alt="">
+    </div>
+    
+</body>
+
+<footer style="background-color: #151937;">
+    <p style="color: #92AAFFCC; font-weight: 700;">Contact</p>
+    <div style="margin-top: 9px;">
+        <p>Instagram</p>
+        <p>@likelion_hansung</p>
+    </div>
+    <div style="margin-top: 6px;">
+        <p>Kakaotalk</p>
+        <p>한성대학교 멋쟁이사자처럼</p>
+    </div>
+</footer>
+</html>
